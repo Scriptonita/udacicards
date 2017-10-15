@@ -12,3 +12,7 @@ export const lightBlue = "#c9f9ff";
 export const green = "#4dccbd";
 export const gray = "#bfd0e0";
 export const redGray = "#b8b3be";
+
+//Add
+export const white = "#fff";
+export const black = "#000";
