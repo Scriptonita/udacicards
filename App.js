@@ -7,8 +7,8 @@ import { Constants } from "expo";
 import { lightBlue, white, blue, black } from "./utils/colors";
 import { TabNavigator, StackNavigator } from "react-navigation";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
-import Decks from "./components/Decks";
-import AddDeck from "./components/AddDeck";
+import Decks from "./components/Decks.js";
+import AddDeck from "./components/AddDeck.js";
 
 const store = configureStore();
 
@@ -67,13 +67,7 @@ const MainNavigator = StackNavigator({
     screen: Tabs
   },
   AddDeck: {
-    screen: AddDeck,
-    navigationOptions: {
-      headerTintColor: white,
-      headerStyle: {
-        backgroundColor: blue
-      }
-    }
+    screen: Tabs
   }
 });
 

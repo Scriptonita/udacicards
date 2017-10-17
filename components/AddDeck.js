@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-  View,
   Text,
   TextInput,
   StyleSheet,
   Platform,
   TouchableOpacity,
-  Alert
+  Alert,
+  KeyboardAvoidingView
 } from "react-native";
 import { white, green } from "../utils/colors";
 import { AppLoading } from "expo";
@@ -34,7 +34,7 @@ class AddDeck extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
         <Text style={styles.title}>What is the title of your new deck?</Text>
         <TextInput
           style={Platform.OS === "ios" ? styles.inputIos : styles.inputAndroid}
@@ -53,7 +53,7 @@ class AddDeck extends Component {
         >
           <Text style={styles.submitBtnText}>Submit</Text>
         </TouchableOpacity>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
