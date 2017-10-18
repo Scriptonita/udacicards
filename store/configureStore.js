@@ -11,8 +11,6 @@ const logger = store => next => action => {
   return result;
 };
 
-const composeEnhacers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
 export default function configureStore() {
-  return createStore(reducer, composeEnhacers(applyMiddleware(thunk, logger)));
+  return createStore(reducer, compose(applyMiddleware(thunk, logger)));
 }

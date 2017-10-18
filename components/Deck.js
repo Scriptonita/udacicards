@@ -8,7 +8,6 @@ import {
   Platform,
   Image
 } from "react-native";
-import { getADeck } from "../actions/deck";
 import { navigationActions } from "react-navigation";
 import { green, white, blue } from "../utils/colors";
 import FlipCard from "react-native-flip-card";
@@ -75,10 +74,7 @@ class Deck extends Component {
     );
   }
 }
-/*
-<View style={([styles.container], { flex: 1 })}>
-</View>
-*/
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -98,7 +94,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-around"
   },
   title: {
-    fontSize: 25
+    fontSize: 25,
+    alignItems: "center",
+    textAlign: "center"
   },
   questions: {
     fontSize: 20
@@ -138,11 +136,5 @@ function mapStateToProps({ decks }) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    getDeck: id => dispatch(getADeck(id))
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Deck);
+export default connect(mapStateToProps, null)(Deck);
 //export default Deck;
