@@ -1,9 +1,7 @@
 import {
   GET_DECKS,
   GET_DECKS_ERROR,
-  GET_DECK,
   SAVE_DECK_TITLE,
-  ADD_CARD_TO_DECK,
   SAVE_DECK_TITLE_ERROR
 } from "../actions/decks";
 
@@ -21,8 +19,6 @@ export function decks(state = {}, action) {
         ...state,
         error
       };
-    case GET_DECKS:
-      return state;
     case SAVE_DECK_TITLE:
       console.log("Deck create with title: ", action.title);
       return state;
@@ -31,8 +27,6 @@ export function decks(state = {}, action) {
         ...state,
         error
       };
-    case ADD_CARD_TO_DECK:
-      return state;
     default:
       return state;
   }

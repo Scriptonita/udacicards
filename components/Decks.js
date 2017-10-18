@@ -13,6 +13,7 @@ import {
 import { white, black, blue, green, redGray } from "../utils/colors";
 import { getAllDecks } from "../actions/decks";
 import { sort } from "../utils/Sort";
+import { navigationActions } from "react-navigation";
 
 class Decks extends Component {
   state = {
@@ -33,16 +34,17 @@ class Decks extends Component {
 
   _renderItem = ({ item }) => {
     const { decks } = this.props;
+    const { navigate } = this.props.navigation;
     return (
       <TouchableOpacity
         style={
           Platform.OS === "ios" ? styles.iosListItem : styles.AndroidListItem
         }
-        onPress={this._onPressButton}
+        onPress={() => navigate("Deck", { item })}
       >
         <Text style={styles.listItemTitle}>{decks[item].title}</Text>
         <Text style={styles.listItemQuestions}>
-          Questions: {decks[item].questions.length}
+          Cards: {decks[item].questions.length}
         </Text>
       </TouchableOpacity>
     );

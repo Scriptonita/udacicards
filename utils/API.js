@@ -14,7 +14,15 @@ export function getDecks() {
   });
 }
 
-export function getDeck(id) {}
+export function getDeck(id) {
+  getDecks()
+    .then(result => {
+      const decks = JSON.parse(result);
+      const deck = decks[id];
+      return deck;
+    })
+    .catch(error => error);
+}
 
 export function saveDeckTitle(title) {
   // TODO: Comprobar que no se repite el titulo

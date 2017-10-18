@@ -9,6 +9,7 @@ import { TabNavigator, StackNavigator } from "react-navigation";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import Decks from "./components/Decks.js";
 import AddDeck from "./components/AddDeck.js";
+import Deck from "./components/Deck.js";
 
 const store = configureStore();
 
@@ -68,6 +69,9 @@ const MainNavigator = StackNavigator({
   },
   AddDeck: {
     screen: Tabs
+  },
+  Deck: {
+    screen: Deck
   }
 });
 
