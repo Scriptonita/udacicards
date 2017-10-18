@@ -9,7 +9,7 @@ import {
   Image
 } from "react-native";
 import { navigationActions } from "react-navigation";
-import { green, white, blue } from "../utils/colors";
+import { green, white, blue, gray } from "../utils/colors";
 import FlipCard from "react-native-flip-card";
 
 class Deck extends Component {
@@ -24,6 +24,9 @@ class Deck extends Component {
   render() {
     const { item } = this.props.navigation.state.params;
     const deck = this.props.decks[item];
+    const disableStart =
+      deck.questions || deck.questions.length === 0 ? true : false;
+    const styleBtn = disableStart ? gray : green;
     return (
       <View style={styles.container}>
         <View style={styles.container}>
@@ -64,8 +67,29 @@ class Deck extends Component {
             <Text style={styles.submitBtnText}>Add Card</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={Platform.OS === "ios" ? styles.iosBtn : styles.AndroidBtn}
+            style={
+              Platform.OS === "ios"
+                ? {
+                    backgroundColor: styleBtn,
+                    padding: 10,
+                    borderRadius: 7,
+                    height: 45,
+                    margin: 10
+                  }
+                : {
+                    backgroundColor: styleBtn,
+                    padding: 10,
+                    paddingLeft: 30,
+                    paddingRight: 30,
+                    height: 45,
+                    borderRadius: 2,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    margin: 10
+                  }
+            }
             onPress={null}
+            disabled={disableStart}
           >
             <Text style={styles.submitBtnText}>Start Quiz</Text>
           </TouchableOpacity>
