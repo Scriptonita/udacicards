@@ -12,42 +12,61 @@ import {
 } from "react-native";
 import { white, green } from "../utils/colors";
 import { AppLoading } from "expo";
-import { deckTitle } from "../actions/decks";
+import { addCardToADeck } from "../actions/decks";
 
-//import { navigationActions } from "react-navigation";
+import { navigationActions } from "react-navigation";
 
-class AddDeck extends Component {
+class AddCard extends Component {
   state = {
-    title: ""
+    question: "",
+    answer: ""
   };
 
-  saveTitle = () => {
-    const { title } = this.state;
-    //const { navigate } = this.props.navigation;
-    if (title === "") {
-      Alert.alert("Error in title", "The title submited is invalid", [
-        { text: "OK", onPress: () => console.log("OK pressed") }
-      ]);
+  saveCard = () => {
+    const { question, answer } = this.state;
+    const title = this.props.navigation.state.params.item;
+    /*
+    const card = {
+      question: this.state.title,
+      answer: this.state.answer
+    }*/
+    if (question === "" || answer === "") {
+      Alert.alert(
+        "Error in Card",
+        "The question or answer submited is invalid",
+        [{ text: "OK", onPress: () => console.log("OK pressed") }]
+      );
     } else {
-      this.props.saveDeckTitle(title.trim());
-      Keyboard.dismiss();
-      //navigate("Decks");
       this.setState({
-        title: ""
+        question: "",
+        answer: ""
       });
+      this.props.addCardToDeck(title, { question, answer });
+      Keyboard.dismiss();
     }
   };
 
   render() {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.container}>
-        <Text style={styles.title}>What is the title of your new deck?</Text>
+        <Text style={styles.title}>What is the Question?</Text>
         <TextInput
           style={Platform.OS === "ios" ? styles.inputIos : styles.inputAndroid}
-          onChangeText={text => this.setState({ title: text })}
-          value={this.state.title}
-          placeholder="Title for a new deck"
-          maxLength={40}
+          onChangeText={text => this.setState({ question: text })}
+          value={this.state.question}
+          placeholder="Write here the question"
+          maxLength={180}
+          multiline={true}
+        />
+        <Text style={styles.title}>What is the Answer</Text>
+
+        <TextInput
+          style={Platform.OS === "ios" ? styles.inputIos : styles.inputAndroid}
+          onChangeText={text => this.setState({ answer: text })}
+          value={this.state.answer}
+          placeholder="Write here the answer"
+          maxLength={180}
+          multiline={true}
         />
         <TouchableOpacity
           style={
@@ -55,7 +74,7 @@ class AddDeck extends Component {
               ? styles.iosSubmitBtn
               : styles.AndroidSubmitBtn
           }
-          onPress={this.saveTitle}
+          onPress={this.saveCard}
         >
           <Text style={styles.submitBtnText}>Submit</Text>
         </TouchableOpacity>
@@ -68,10 +87,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "flex-start",
+    marginTop: 10
   },
   title: {
-    fontSize: 35,
+    fontSize: 20,
     textAlign: "center",
     marginBottom: 15,
     marginLeft: 20,
@@ -123,8 +143,9 @@ const styles = StyleSheet.create({
 
 function mapDispatchToProps(dispatch) {
   return {
-    saveDeckTitle: title => dispatch(deckTitle(title))
+    addCardToDeck: (title, { question, answer }) =>
+      dispatch(addCardToADeck(title, { question, answer }))
   };
 }
 
-export default connect(null, mapDispatchToProps)(AddDeck);
+export default connect(null, mapDispatchToProps)(AddCard);

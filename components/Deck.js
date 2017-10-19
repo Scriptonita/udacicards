@@ -24,9 +24,9 @@ class Deck extends Component {
   render() {
     const { item } = this.props.navigation.state.params;
     const deck = this.props.decks[item];
-    const disableStart =
-      deck.questions || deck.questions.length === 0 ? true : false;
+    const disableStart = deck.questions.length === 0 ? true : false;
     const styleBtn = disableStart ? gray : green;
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <View style={styles.container}>
@@ -62,7 +62,7 @@ class Deck extends Component {
         <View style={styles.buttons}>
           <TouchableOpacity
             style={Platform.OS === "ios" ? styles.iosBtn : styles.AndroidBtn}
-            onPress={null}
+            onPress={() => navigate("AddCard", { item })}
           >
             <Text style={styles.submitBtnText}>Add Card</Text>
           </TouchableOpacity>

@@ -2,7 +2,11 @@ import {
   GET_DECKS,
   GET_DECKS_ERROR,
   SAVE_DECK_TITLE,
-  SAVE_DECK_TITLE_ERROR
+  SAVE_DECK_TITLE_ERROR,
+  ADD_CARD_TO_DECK,
+  ADD_CARD_TO_DECK_ERROR,
+  REMOVE_ALL_DECKS,
+  REMOVE_ALL_DECKS_ERROR
 } from "../actions/decks";
 
 export function decks(state = {}, action) {
@@ -27,6 +31,17 @@ export function decks(state = {}, action) {
         ...state,
         error
       };
+    case ADD_CARD_TO_DECK:
+      return state;
+    case ADD_CARD_TO_DECK_ERROR:
+      return {
+        ...state,
+        error
+      };
+    case REMOVE_ALL_DECKS:
+      return {};
+    case REMOVE_ALL_DECKS_ERROR:
+      return {};
     default:
       return state;
   }

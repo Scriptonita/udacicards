@@ -1,4 +1,9 @@
-import { GET_DECK, GET_DECK_ERROR, ADD_CARD_TO_DECK } from "../actions/deck";
+import {
+  GET_DECK,
+  GET_DECK_ERROR,
+  ADD_CARD_TO_DECK,
+  ADD_CARD_TO_DECK_ERROR
+} from "../actions/deck";
 
 export function deck(state = {}, action) {
   const { deck, error } = action;
@@ -10,8 +15,6 @@ export function deck(state = {}, action) {
         return state;
       }
     case GET_DECK_ERROR:
-      return state;
-    case ADD_CARD_TO_DECK:
       return state;
     default:
       return state;

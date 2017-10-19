@@ -39,4 +39,20 @@ export function saveDeckTitle(title) {
   );
 }
 
-export function addCardToDeck(title, card) {}
+export function addCardToDeck(title, card) {
+  return AsyncStorage.getItem(STORAGE_KEY, (error, result) => {
+    if (result) {
+      let decks = JSON.parse(result);
+      decks[title].questions.push(card);
+      AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(decks));
+    } else {
+      console.log("Error obteniendo items");
+    }
+  });
+}
+
+export function removeDecks() {
+  return AsyncStorage.removeItem(STORAGE_KEY, result =>
+    console.log("Storage removed")
+  );
+}
