@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import reducer from "../reducers";
 import thunk from "redux-thunk";
+import { composeWithDevTools } from "remote-redux-devtools";
 
 const logger = store => next => action => {
   console.group(action.type);
@@ -12,5 +13,8 @@ const logger = store => next => action => {
 };
 
 export default function configureStore() {
-  return createStore(reducer, compose(applyMiddleware(thunk, logger)));
+  return createStore(
+    reducer,
+    composeWithDevTools(applyMiddleware(thunk, logger))
+  );
 }

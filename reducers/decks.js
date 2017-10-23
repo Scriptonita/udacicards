@@ -6,42 +6,48 @@ import {
   ADD_CARD_TO_DECK,
   ADD_CARD_TO_DECK_ERROR,
   REMOVE_ALL_DECKS,
-  REMOVE_ALL_DECKS_ERROR
+  REMOVE_ALL_DECKS_ERROR,
+  IMPORT_DECKS,
+  IMPORT_DECKS_ERROR
 } from "../actions/decks";
 
 export function decks(state = {}, action) {
-  const { error } = action;
+  const { error, decks } = action;
   switch (action.type) {
     case GET_DECKS:
+      /*
       if (action.decks) {
         return JSON.parse(action.decks);
       } else {
         return {};
       }
+      */
+      return decks;
     case GET_DECKS_ERROR:
-      return {
-        ...state,
-        error
-      };
+      console.log("Error: ", action.error);
+      return state;
     case SAVE_DECK_TITLE:
-      console.log("Deck create with title: ", action.title);
       return state;
     case SAVE_DECK_TITLE_ERROR:
-      return {
-        ...state,
-        error
-      };
+      console.log("Error: ", action.error);
+      return state;
     case ADD_CARD_TO_DECK:
       return state;
     case ADD_CARD_TO_DECK_ERROR:
-      return {
-        ...state,
-        error
-      };
+      console.log("Error: ", action.error);
+      return state;
     case REMOVE_ALL_DECKS:
-      return {};
+      state = {};
+      return state;
     case REMOVE_ALL_DECKS_ERROR:
-      return {};
+      console.log("Error: ", action.error);
+      state = {};
+      return state;
+    case IMPORT_DECKS:
+      return state;
+    case IMPORT_DECKS_ERROR:
+      console.log("Error: ", action.error);
+      return state;
     default:
       return state;
   }

@@ -56,3 +56,8 @@ export function removeDecks() {
     console.log("Storage removed")
   );
 }
+
+export function importDecksData(data) {
+  console.log("DATA: ", data);
+  return AsyncStorage.mergeItem(STORAGE_KEY, JSON.stringify(data));
+}

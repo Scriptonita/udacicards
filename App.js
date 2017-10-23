@@ -11,7 +11,10 @@ import Decks from "./components/Decks.js";
 import AddDeck from "./components/AddDeck.js";
 import Deck from "./components/Deck.js";
 import AddCard from "./components/AddCard.js";
-import Remove from "./components/Remove.js";
+import Options from "./components/Options.js";
+import Quiz from "./components/Quiz.js";
+import { setLocalNotification, clearNotification } from "./utils/notifications";
+import { Notifications, Permissions } from "expo";
 
 const store = configureStore();
 
@@ -43,12 +46,12 @@ const Tabs = TabNavigator(
         )
       }
     },
-    Remove: {
-      screen: Remove,
+    Options: {
+      screen: Options,
       navigationOptions: {
-        tabBarLabel: "Remove",
+        tabBarLabel: "Options",
         tabBarIcon: ({ tintColor }) => (
-          <FontAwesome name="trash" size={30} color={tintColor} />
+          <FontAwesome name="cog" size={30} color={tintColor} />
         )
       }
     }
@@ -81,7 +84,7 @@ const MainNavigator = StackNavigator({
   AddDeck: {
     screen: Tabs
   },
-  Remove: {
+  Options: {
     screen: Tabs
   },
   Deck: {
@@ -89,10 +92,37 @@ const MainNavigator = StackNavigator({
   },
   AddCard: {
     screen: AddCard
+  },
+  Quiz: {
+    screen: Quiz
   }
 });
 
+async function getiOSNotificationPermission() {
+  const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+  if (status !== "granted") {
+    await Permissions.askAsync(Permissions.NOTIFICATIONS);
+  }
+}
+
 export default class App extends React.Component {
+  componentDidMount() {
+    clearNotification();
+    if (Platform.OS === "ios") {
+      getiOSNotificationPermission();
+    }
+    setLocalNotification();
+    console.log("Notifications");
+  }
+
+  listenForNotifications = () => {
+    Notifications.addListener(notification => {
+      if (notification.origin === "received" && Platform.OS === "ios") {
+        Alert.alert(notification.title, notification.body);
+      }
+    });
+  };
+
   render() {
     return (
       <Provider store={store}>

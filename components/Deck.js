@@ -21,10 +21,21 @@ class Deck extends Component {
     title: navigation.state.params.item
   });
 
+  disableStartButton = deck => {
+    if (deck.questions) {
+      return deck.questions.length === 0 ? true : false;
+    } else {
+      return false;
+    }
+  };
+
   render() {
     const { item } = this.props.navigation.state.params;
     const deck = this.props.decks[item];
-    const disableStart = deck.questions.length === 0 ? true : false;
+    let disableStart = false;
+    if (deck) {
+      disableStart = this.disableStartButton(deck);
+    }
     const styleBtn = disableStart ? gray : green;
     const { navigate } = this.props.navigation;
     return (
@@ -88,7 +99,7 @@ class Deck extends Component {
                     margin: 10
                   }
             }
-            onPress={null}
+            onPress={() => navigate("Quiz", { item })}
             disabled={disableStart}
           >
             <Text style={styles.submitBtnText}>Start Quiz</Text>

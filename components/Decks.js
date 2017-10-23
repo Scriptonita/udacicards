@@ -56,7 +56,8 @@ class Decks extends Component {
   render() {
     const { errorLoading } = this.state;
     const { decks } = this.props;
-    let keys = Object.keys(decks);
+    let keys = [];
+    keys = Object.keys(decks);
     return (
       <View style={styles.container}>
         {keys.length === 0 && (

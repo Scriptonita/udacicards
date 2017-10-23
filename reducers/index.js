@@ -1,5 +1,5 @@
 import { combineReducers } from "redux";
 import { decks } from "../reducers/decks";
-import { deck } from "../reducers/deck";
+import { options } from "../reducers/options";
 
-export default combineReducers({ decks, deck });
+export default combineReducers({ decks, options });
