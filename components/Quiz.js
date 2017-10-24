@@ -12,12 +12,21 @@ import { navigationActions } from "react-navigation";
 import { green, white, blue, gray, redGray } from "../utils/colors";
 import FlipCard from "react-native-flip-card";
 
+const perfect = require("../images/perfect.gif");
+const success = require("../images/success.gif");
+const upss = require("../images/upss.gif");
+const fail = require("../images/fail.gif");
+
 class Quiz extends Component {
   state = {
     id: null,
     score: 0,
     current: 0
   };
+
+  static navigationOptions = ({ navigation }) => ({
+    title: "Back"
+  });
 
   scoreUp = () => {
     const { current, score } = this.state;
@@ -34,20 +43,33 @@ class Quiz extends Component {
     });
   };
 
+  gifURL = score => {
+    if (score === 100) {
+      return perfect;
+    } else if (score < 100 && score >= 50) {
+      return success;
+    } else if (score < 50 && score >= 25) {
+      return upss;
+    } else {
+      return fail;
+    }
+  };
+
   render() {
     const { item } = this.props.navigation.state.params;
     const deck = this.props.decks[item];
-    const disableStart = deck.questions.length === 0 ? true : false;
-    const styleBtn = disableStart ? gray : green;
     const { navigate } = this.props.navigation;
-    const { current, score } = this.state;
+    const { current, score, local } = this.state;
     const total = deck.questions.length;
 
     if (total === current) {
+      const percent = Math.round(score * 100 / total);
+      gifAddress = this.gifURL(percent);
+      console.log("GifAddress: ", gifAddress);
       return (
         <View style={styles.container}>
           <FlipCard
-            style={styles.card}
+            style={[styles.card, { marginBottom: 10 }]}
             friction={6}
             perspective={1000}
             flipHorizontal={true}
@@ -62,23 +84,16 @@ class Quiz extends Component {
                   Right Answers: {score + "/" + total}
                 </Text>
 
-                <Text style={styles.title}>
-                  Score: {Math.round(score * 100 / total)}%
-                </Text>
+                <Text style={styles.title}>Score: {percent}%</Text>
+                <View style={{ borderWidth: 5, borderRadius: 5 }}>
+                  <Image style={{ width: 200 }} source={gifAddress} />
+                </View>
               </View>
             </View>
             <View>
               <Text>End</Text>
             </View>
           </FlipCard>
-          <View style={styles.buttons}>
-            <TouchableOpacity
-              style={Platform.OS === "ios" ? styles.iosBtn : styles.AndroidBtn}
-              onPress={() => navigate("Decks")}
-            >
-              <Text style={styles.submitBtnText}>Home</Text>
-            </TouchableOpacity>
-          </View>
         </View>
       );
     }
@@ -144,7 +159,6 @@ class Quiz extends Component {
           <TouchableOpacity
             style={Platform.OS === "ios" ? styles.iosBtn : styles.AndroidBtn}
             onPress={this.continue}
-            disabled={disableStart}
           >
             <Text style={styles.submitBtnText}>Incorrect</Text>
           </TouchableOpacity>

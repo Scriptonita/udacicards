@@ -9,9 +9,10 @@ import {
   View,
   Switch
 } from "react-native";
-import { white, green, gray } from "../utils/colors";
+import { white, green, gray, black } from "../utils/colors";
 import { removeAllDecks, importDecks } from "../actions/decks";
 import { DecksDemo } from "../utils/data-demo.js";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 class Options extends Component {
   state = {
@@ -51,33 +52,35 @@ class Options extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={{ flexDirection: "row" }}>
-          <Text style={styles.title}>Notifications</Text>
-          <Switch onTintColor={green} thumbTintColor={gray} />
+        <View>
+          <View style={{ alignSelf: "center" }}>
+            <TouchableOpacity
+              style={
+                Platform.OS === "ios"
+                  ? styles.iosSubmitBtn
+                  : styles.AndroidSubmitBtn
+              }
+              onPress={this.removeDecks}
+            >
+              <MaterialCommunityIcons name="delete" size={30} color={black} />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.title}>Remove all Decks</Text>
         </View>
         <View>
-          <TouchableOpacity
-            style={
-              Platform.OS === "ios"
-                ? styles.iosSubmitBtn
-                : styles.AndroidSubmitBtn
-            }
-            onPress={this.removeDecks}
-          >
-            <Text style={styles.submitBtnText}>Remove all Decks</Text>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <TouchableOpacity
-            style={
-              Platform.OS === "ios"
-                ? styles.iosSubmitBtn
-                : styles.AndroidSubmitBtn
-            }
-            onPress={this.importDataDemo}
-          >
-            <Text style={styles.submitBtnText}>Import data example</Text>
-          </TouchableOpacity>
+          <View style={{ alignSelf: "center" }}>
+            <TouchableOpacity
+              style={
+                Platform.OS === "ios"
+                  ? styles.iosSubmitBtn
+                  : styles.AndroidSubmitBtn
+              }
+              onPress={this.importDataDemo}
+            >
+              <MaterialCommunityIcons name="import" size={30} color={black} />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.title}>Import data example</Text>
         </View>
       </View>
     );
@@ -87,34 +90,28 @@ class Options extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "flex-start",
-    justifyContent: "center",
+    alignItems: "center",
+    justifyContent: "space-around",
     padding: 10
   },
   title: {
-    fontSize: 22,
+    fontSize: 20,
     textAlign: "center",
-    marginBottom: 15,
-    marginLeft: 20,
-    marginRight: 20
+    marginTop: 5
   },
   iosSubmitBtn: {
     backgroundColor: green,
-    padding: 10,
-    borderRadius: 7,
-    height: 45,
-    marginTop: 10
+    borderWidth: 1,
+    borderRadius: 3,
+    padding: 5,
+    paddingLeft: 25,
+    paddingRight: 25
   },
   AndroidSubmitBtn: {
     backgroundColor: green,
+    margin: 5,
     padding: 10,
-    paddingLeft: 30,
-    paddingRight: 30,
-    height: 45,
-    borderRadius: 2,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 10
+    borderRadius: 2
   },
   submitBtnText: {
     color: white,

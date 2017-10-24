@@ -18,16 +18,22 @@ import { navigationActions } from "react-navigation";
 class Decks extends Component {
   state = {
     isReady: false,
-    errorLoading: false
+    errorLoading: false,
+    keys: []
   };
 
   componentDidMount() {
     this.props.getDecks();
-    /*
-      .then(() => dispatch(this.setState({ loading: false })))
-      .catch(error => console.log("Error reading decks datas!!"));
-      */
   }
+
+  componentWillReceiveProps(nextProps) {
+    const { decks } = nextProps;
+    let keys = Object.keys(decks);
+    this.setState({
+      keys: keys
+    });
+  }
+
   _onPressButton() {
     console.log("Presionado");
   }
@@ -54,10 +60,8 @@ class Decks extends Component {
   _keyExtractor = item => item;
 
   render() {
-    const { errorLoading } = this.state;
+    const { isReady, keys } = this.state;
     const { decks } = this.props;
-    let keys = [];
-    keys = Object.keys(decks);
     return (
       <View style={styles.container}>
         {keys.length === 0 && (
@@ -70,7 +74,7 @@ class Decks extends Component {
           </View>
         )}
         {keys.length > 0 && (
-          <View style={{ flex: 2 }}>
+          <View style={{ flex: 1 }}>
             <FlatList
               data={keys}
               renderItem={this._renderItem}

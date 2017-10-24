@@ -14,7 +14,15 @@ import FlipCard from "react-native-flip-card";
 
 class Deck extends Component {
   state = {
-    id: null
+    deck: {
+      title: "Dummy data",
+      questions: [
+        {
+          question: "Why this dummy data?",
+          answer: "To prevent errors"
+        }
+      ]
+    }
   };
 
   static navigationOptions = ({ navigation }) => ({
@@ -31,82 +39,92 @@ class Deck extends Component {
 
   render() {
     const { item } = this.props.navigation.state.params;
-    const deck = this.props.decks[item];
+    let deck = this.props.decks[item];
     let disableStart = false;
     if (deck) {
       disableStart = this.disableStartButton(deck);
+    } else {
+      deck = this.state;
     }
     const styleBtn = disableStart ? gray : green;
     const { navigate } = this.props.navigation;
-    return (
-      <View style={styles.container}>
+    if (deck) {
+      return (
         <View style={styles.container}>
-          <FlipCard
-            style={styles.card}
-            friction={6}
-            perspective={1000}
-            flipHorizontal={true}
-            flipVertical={false}
-            flip={false}
-            clickable={false}
-            onFlipEnd={isFlipEnd => {
-              console.log("isFlipEnd", isFlipEnd);
-            }}
-          >
-            {/* Face Side */}
-            <View style={styles.content}>
-              <View>
-                <Text style={styles.title}>{deck.title}</Text>
+          <View style={styles.container}>
+            <FlipCard
+              style={styles.card}
+              friction={6}
+              perspective={1000}
+              flipHorizontal={true}
+              flipVertical={false}
+              flip={false}
+              clickable={false}
+              onFlipEnd={isFlipEnd => {
+                console.log("isFlipEnd", isFlipEnd);
+              }}
+            >
+              {/* Face Side */}
+              <View style={styles.content}>
+                <View>
+                  <Text style={styles.title}>{deck.title}</Text>
+                </View>
+                <View>
+                  <Text style={styles.questions}>
+                    {deck.questions ? deck.questions.length : 0} Cards
+                  </Text>
+                </View>
               </View>
-              <View>
-                <Text style={styles.questions}>
-                  {deck.questions ? deck.questions.length : 0} Cards
-                </Text>
+              {/* Back Side */}
+              <View style={styles.content}>
+                <Text>The Back</Text>
               </View>
-            </View>
-            {/* Back Side */}
-            <View style={styles.content}>
-              <Text>The Back</Text>
-            </View>
-          </FlipCard>
+            </FlipCard>
+          </View>
+          <View style={styles.buttons}>
+            <TouchableOpacity
+              style={Platform.OS === "ios" ? styles.iosBtn : styles.AndroidBtn}
+              onPress={() => navigate("AddCard", { item })}
+            >
+              <Text style={styles.submitBtnText}>Add Card</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={
+                Platform.OS === "ios"
+                  ? {
+                      backgroundColor: styleBtn,
+                      padding: 10,
+                      borderRadius: 7,
+                      height: 45,
+                      margin: 10
+                    }
+                  : {
+                      backgroundColor: styleBtn,
+                      padding: 10,
+                      paddingLeft: 30,
+                      paddingRight: 30,
+                      height: 45,
+                      borderRadius: 2,
+                      justifyContent: "center",
+                      alignItems: "center",
+                      margin: 10
+                    }
+              }
+              onPress={() => navigate("Quiz", { item })}
+              disabled={disableStart}
+            >
+              <Text style={styles.submitBtnText}>Start Quiz</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <View style={styles.buttons}>
-          <TouchableOpacity
-            style={Platform.OS === "ios" ? styles.iosBtn : styles.AndroidBtn}
-            onPress={() => navigate("AddCard", { item })}
-          >
-            <Text style={styles.submitBtnText}>Add Card</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={
-              Platform.OS === "ios"
-                ? {
-                    backgroundColor: styleBtn,
-                    padding: 10,
-                    borderRadius: 7,
-                    height: 45,
-                    margin: 10
-                  }
-                : {
-                    backgroundColor: styleBtn,
-                    padding: 10,
-                    paddingLeft: 30,
-                    paddingRight: 30,
-                    height: 45,
-                    borderRadius: 2,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    margin: 10
-                  }
-            }
-            onPress={() => navigate("Quiz", { item })}
-            disabled={disableStart}
-          >
-            <Text style={styles.submitBtnText}>Start Quiz</Text>
-          </TouchableOpacity>
+      );
+    } else {
+      return (
+        <View style={styles.container}>
+          <Text>Error loading Deck</Text>
         </View>
-      </View>
-    );
+      );
+    }
   }
 }
 
