@@ -2,6 +2,10 @@
 
 For the UdaciCards project, we build a mobile application that allows users to study collections of flashcards. Users will be able to create decks and flashcards to those decks. The user can take quizzes on those decks and get the percentage correct when the quiz is complete.
 
+This mobile application is developed to work on IOS and Android and had been tested in:
+  * Iphone 5c (iOS 10.3.3)
+  * Vernee Mars Pro (Android 7.0)
+
 ## TL;DR
 
 To get started developing right away:
@@ -16,7 +20,7 @@ To get started developing right away:
 ├── App.js # This is main function.
 ├── App.test.js # Used for testing. Provided with Create React App.
 ├── icon-notification.png
-├── icon.png 
+├── icon.png
 ├── actions # Actions Folder.
 │   ├── options.js # actions to manage options
 │   └── decks.js # actions to manage decks
