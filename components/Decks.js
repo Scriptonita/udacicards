@@ -12,7 +12,6 @@ import {
 } from "react-native";
 import { white, black, blue, green, redGray } from "../utils/colors";
 import { getAllDecks } from "../actions/decks";
-import { sort } from "../utils/Sort";
 import { navigationActions } from "react-navigation";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
