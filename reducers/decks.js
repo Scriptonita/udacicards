@@ -11,17 +11,30 @@ import {
   IMPORT_DECKS_ERROR
 } from "../actions/types";
 
-export function decks(state = {}, action) {
+const INITIAL_STATE = {
+  UdaciCards: {
+    title: "UdaciCards",
+    questions: [
+      {
+        question: "What can I do with UdaciCards?",
+        answer: "You can create some decks"
+      },
+      {
+        question: "What can I do with a deck?",
+        answer: "You can add some flashcards to deck"
+      },
+      {
+        question: "What can I do with decks and flashcards?",
+        answer: "You can play quizzes"
+      }
+    ]
+  }
+};
+
+export function decks(state = INITIAL_STATE, action) {
   const { error, decks } = action;
   switch (action.type) {
     case GET_DECKS:
-      /*
-      if (action.decks) {
-        return JSON.parse(action.decks);
-      } else {
-        return {};
-      }
-      */
       return decks;
     case GET_DECKS_ERROR:
       console.log("Error: ", action.error);

@@ -1,6 +1,10 @@
 import { IMPORT_DEMO_DECKS } from "../actions/types";
 
-export function options(state = {}, action) {
+const INITIAL_STATE = {
+  last: null
+};
+
+export function options(state = INITIAL_STATE, action) {
   const { last } = action;
   switch (action.type) {
     case IMPORT_DEMO_DECKS:
