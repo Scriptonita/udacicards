@@ -13,6 +13,7 @@ import {
 import { white, green } from "../utils/colors";
 import { AppLoading } from "expo";
 import { deckTitle } from "../actions/decks";
+import { navigationActions } from "react-navigation";
 
 /** @class
 * @name AddDeck
@@ -29,18 +30,19 @@ class AddDeck extends Component {
 
   saveTitle = () => {
     const { title } = this.state;
-    //const { navigate } = this.props.navigation;
+    const { navigate } = this.props.navigation;
     if (title === "") {
       Alert.alert("Error in title", "The title submited is invalid", [
         { text: "OK", onPress: () => console.log("OK pressed") }
       ]);
     } else {
-      this.props.saveDeckTitle(title.trim());
+      const item = title.trim();
+      this.props.saveDeckTitle(item);
       Keyboard.dismiss();
-      //navigate("Decks");
       this.setState({
         title: ""
       });
+      navigate("Deck", { item });
     }
   };
 
