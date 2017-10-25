@@ -76,26 +76,30 @@ class Decks extends Component {
   //<View style={styles.listItem} key={this.keyExtractor}>
   _keyExtractor = item => item;
 
+  renderNoDecks = () => {
+    return (
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+      >
+        <Image
+          source={require("../images/no-decks.png")}
+          style={styles.image}
+        />
+        <Text style={styles.noDecks}>No decks available</Text>
+      </View>
+    );
+  };
+
   render() {
     const { keys } = this.state;
     const { decks } = this.props;
     return (
       <View style={styles.container}>
-        {keys.length === 0 && (
-          <View
-            style={{
-              flex: 1,
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-          >
-            <Image
-              source={require("../images/no-decks.png")}
-              style={styles.image}
-            />
-            <Text style={styles.noDecks}>No decks available</Text>
-          </View>
-        )}
+        {keys.length === 0 && this.renderNoDecks()}
         {keys.length > 0 && (
           <View style={{ alignSelf: "stretch" }}>
             <FlatList
