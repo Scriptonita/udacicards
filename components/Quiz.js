@@ -66,6 +66,13 @@ class Quiz extends Component {
     }
   };
 
+  restart = () => {
+    this.setState({
+      score: 0,
+      current: 0
+    });
+  };
+
   render() {
     const { item } = this.props.navigation.state.params;
     const deck = this.props.decks[item];
@@ -105,6 +112,14 @@ class Quiz extends Component {
               <Text>End</Text>
             </View>
           </FlipCard>
+          <View>
+            <TouchableOpacity
+              style={Platform.OS === "ios" ? styles.iosBtn : styles.AndroidBtn}
+              onPress={this.restart}
+            >
+              <Text style={styles.submitBtnText}>Restart Quiz</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       );
     }
