@@ -5,7 +5,6 @@ import configureStore from "./store/configureStore";
 import { StyleSheet, Text, View, StatusBar, Platform } from "react-native";
 import { Constants } from "expo";
 import { lightBlue, white, blue, black } from "./utils/colors";
-import { TabNavigator, StackNavigator } from "react-navigation";
 import { FontAwesome, Ionicons } from "@expo/vector-icons";
 import Decks from "./components/Decks.js";
 import AddDeck from "./components/AddDeck.js";
@@ -15,6 +14,7 @@ import Options from "./components/Options.js";
 import Quiz from "./components/Quiz.js";
 import { setLocalNotification, clearNotification } from "./utils/notifications";
 import { Notifications, Permissions } from "expo";
+import { Tabs, MainNavigator } from "./utils/navigation.js";
 
 const store = configureStore();
 
@@ -30,78 +30,6 @@ function StatusBarSpace({ backgroundColor }) {
     </View>
   );
 }
-
-const Tabs = TabNavigator(
-  {
-    Decks: {
-      screen: Decks,
-      navigationOptions: {
-        tabBarLabel: "Decks",
-        tabBarIcon: ({ tintColor }) => (
-          <FontAwesome name="list" size={30} color={tintColor} />
-        )
-      }
-    },
-    AddDeck: {
-      screen: AddDeck,
-      navigationOptions: {
-        tabBarLabel: "New Deck",
-        tabBarIcon: ({ tintColor }) => (
-          <FontAwesome name="plus-square" size={30} color={tintColor} />
-        )
-      }
-    },
-    Options: {
-      screen: Options,
-      navigationOptions: {
-        tabBarLabel: "Options",
-        tabBarIcon: ({ tintColor }) => (
-          <FontAwesome name="cog" size={30} color={tintColor} />
-        )
-      }
-    }
-  },
-  {
-    navigationOptions: {
-      header: null
-    },
-    tabBarOptions: {
-      activeTintColor: Platform.OS === "ios" ? black : white,
-      style: {
-        height: 56,
-        backgroundColor: Platform.OS === "ios" ? lightBlue : blue,
-        shadowColor: "rgba(0, 0, 0, 0.24)",
-        shadowOffset: {
-          width: 0,
-          height: 3
-        },
-        shadowRadius: 6,
-        shadowOpacity: 1
-      }
-    }
-  }
-);
-
-const MainNavigator = StackNavigator({
-  Home: {
-    screen: Tabs
-  },
-  AddDeck: {
-    screen: Tabs
-  },
-  Options: {
-    screen: Tabs
-  },
-  Deck: {
-    screen: Deck
-  },
-  AddCard: {
-    screen: AddCard
-  },
-  Quiz: {
-    screen: Quiz
-  }
-});
 
 /** @function
 * @name getiOSNotificationPermission
