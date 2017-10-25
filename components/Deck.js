@@ -100,27 +100,12 @@ class Deck extends Component {
               <Text style={styles.submitBtnText}>Add Card</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={
+              style={[
                 Platform.OS === "ios"
-                  ? {
-                      backgroundColor: styleBtn,
-                      padding: 10,
-                      borderRadius: 7,
-                      height: 45,
-                      margin: 10
-                    }
-                  : {
-                      backgroundColor: styleBtn,
-                      padding: 10,
-                      paddingLeft: 30,
-                      paddingRight: 30,
-                      height: 45,
-                      borderRadius: 2,
-                      justifyContent: "center",
-                      alignItems: "center",
-                      margin: 10
-                    }
-              }
+                  ? styles.iosStartButton
+                  : styles.androidStartButton,
+                { backgroundColor: styleBtn }
+              ]}
               onPress={() => navigate("Quiz", { item })}
               disabled={disableStart}
             >
@@ -191,6 +176,22 @@ const styles = StyleSheet.create({
     color: white,
     fontSize: 22,
     textAlign: "center"
+  },
+  iosStartButton: {
+    padding: 10,
+    borderRadius: 7,
+    height: 45,
+    margin: 10
+  },
+  androidStartButton: {
+    padding: 10,
+    paddingLeft: 30,
+    paddingRight: 30,
+    height: 45,
+    borderRadius: 2,
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 10
   }
 });
 
