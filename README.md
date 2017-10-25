@@ -18,7 +18,6 @@ To get started developing right away:
 ├── README.md - This file.
 ├── package.json # npm package manager file. It's unlikely that you'll need to modify this.
 ├── App.js # This is main function.
-├── App.test.js # Used for testing. Provided with Create React App.
 ├── icon-notification.png
 ├── icon.png
 ├── actions # Actions Folder.
