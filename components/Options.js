@@ -14,6 +14,15 @@ import { removeAllDecks, importDecks } from "../actions/decks";
 import { DecksDemo } from "../utils/data-demo.js";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+/** @function
+* @name Options
+* @description - Functionality to show options (remove, import)
+* @prop {function} removeAllDecks - dispatch removeAllDecks action
+* @prop {function} importDecks - dispatch importDecks action
+* @method removeDecks - show an alert and if Ok call to removeDecks
+* @method importDataDemo - show an alert and if Ok call to importDecks
+*/
+
 class Options extends Component {
   state = {
     title: ""

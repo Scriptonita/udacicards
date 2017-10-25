@@ -14,7 +14,13 @@ import { white, green } from "../utils/colors";
 import { AppLoading } from "expo";
 import { deckTitle } from "../actions/decks";
 
-//import { navigationActions } from "react-navigation";
+/** @class
+* @name AddDeck
+* @description - Functionality to add a deck
+* @param {string} title - The title for the new deck
+* @prop {function} saveDeckTitle - dispatch callTitle action
+* @method saveTitle - Show an alert when error and if Ok then call to saveDeckTitle action
+*/
 
 class AddDeck extends Component {
   state = {

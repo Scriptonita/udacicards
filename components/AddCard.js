@@ -16,6 +16,15 @@ import { addCardToADeck } from "../actions/decks";
 
 import { navigationActions } from "react-navigation";
 
+/** @class
+* @name AddCard
+* @description - Functionality to add cards to a Deck
+* @param {string} question - A new question to add
+* @param {string} answer - The answer for the question to add
+* @prop {function} addCardToDeck - dispatch addCardToDeck action
+* @method saveCard - Show an alert when error and if Ok then call to addCardToADeck action
+*/
+
 class AddCard extends Component {
   state = {
     question: "",

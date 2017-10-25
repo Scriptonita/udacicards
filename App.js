@@ -18,6 +18,11 @@ import { Notifications, Permissions } from "expo";
 
 const store = configureStore();
 
+/** @function
+* @name StatusBarSpace
+* @description - Change StatusBarSpace color
+*/
+
 function StatusBarSpace({ backgroundColor }) {
   return (
     <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
@@ -98,12 +103,24 @@ const MainNavigator = StackNavigator({
   }
 });
 
+/** @function
+* @name getiOSNotificationPermission
+* @description - Permissions to show notifications for IOS
+*/
+
 async function getiOSNotificationPermission() {
   const { status } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
   if (status !== "granted") {
     await Permissions.askAsync(Permissions.NOTIFICATIONS);
   }
 }
+
+/** @class
+* @name App
+* @description - Main function
+* @method {function} componentDidMount - Manage notifications
+* @method {function} listenForNotifications - Set notifications listener
+*/
 
 export default class App extends React.Component {
   componentDidMount() {

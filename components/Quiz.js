@@ -17,9 +17,20 @@ const success = require("../images/success.gif");
 const upss = require("../images/upss.gif");
 const fail = require("../images/fail.gif");
 
+/** @function
+* @name Quiz
+* @description - Functionality to play a quiz
+* @param {number} score - Contain the quiz score
+* @param {number} current - index to the card playing
+* @prop {object} Decks - Contain all decks
+* @method navigationOptions - Title for the screen
+* @method scoreUp - Increment score and current
+* @method continue - Increment current
+* @method gifURL - Get gif depending on score
+*/
+
 class Quiz extends Component {
   state = {
-    id: null,
     score: 0,
     current: 0
   };

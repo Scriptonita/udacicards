@@ -12,6 +12,17 @@ import { navigationActions } from "react-navigation";
 import { green, white, blue, gray } from "../utils/colors";
 import FlipCard from "react-native-flip-card";
 
+/** @class
+* @name Deck
+* @description - Show a deck for add new card or start the quiz
+* @param {object} deck - Contain details of a deck
+* @param {title} title - A dummy title for prevent errors
+* @param {array} questions - Questions list
+* @prop {object} decks - Contain all decks
+* @method navigationActions - Set the title for the screen
+* @method disableStartButton - Check if the start button must be disabled if not cards
+*/
+
 class Deck extends Component {
   state = {
     deck: {
