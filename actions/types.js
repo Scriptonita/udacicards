@@ -1,0 +1,16 @@
+// Decks action types
+export const GET_DECKS = "GET_DECKS";
+export const GET_DECKS_ERROR = "GET_DECKS_ERROR";
+export const SAVE_DECK_TITLE = "SAVE_DECK_TITLE";
+export const SAVE_DECK_TITLE_ERROR = "SAVE_DECK_TITLE_ERROR";
+export const ADD_CARD_TO_DECK = "ADD_CARD_TO_DECK";
+export const ADD_CARD_TO_DECK_ERROR = "ADD_CARD_TO_DECK_ERROR";
+export const REMOVE_ALL_DECKS = "REMOVE_ALL_DECKS";
+export const REMOVE_ALL_DECKS_ERROR = "REMOVE_ALL_DECKS_ERROR";
+export const IMPORT_DECKS = "IMPORT_DECKS";
+export const IMPORT_DECKS_ERROR = "IMPORT_DECKS_ERROR";
+
+// Option action types
+
+export const IMPORT_DEMO_DECKS = "IMPORT_DEMO_DECKS";
+export const IMPORT_DEMO_DECKS_ERROR = "IMPORT_DEMO_DECKS_ERROR";

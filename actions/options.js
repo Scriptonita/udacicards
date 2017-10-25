@@ -1,5 +1,4 @@
-export const IMPORT_DEMO_DECKS = "IMPORT_DEMO_DECKS";
-export const IMPORT_DEMO_DECKS_ERROR = "IMPORT_DEMO_DECKS_ERROR";
+import { IMPORT_DEMO_DECKS, IMPORT_DEMO_DECKS_ERROR } from "./types";
 
 export function importDecksDemo() {
   return dispatch =>

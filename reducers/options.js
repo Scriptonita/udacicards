@@ -1,4 +1,4 @@
-import { IMPORT_DEMO_DECKS } from "../actions/options";
+import { IMPORT_DEMO_DECKS } from "../actions/types";
 
 export function options(state = {}, action) {
   const { last } = action;

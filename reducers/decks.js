@@ -9,7 +9,7 @@ import {
   REMOVE_ALL_DECKS_ERROR,
   IMPORT_DECKS,
   IMPORT_DECKS_ERROR
-} from "../actions/decks";
+} from "../actions/types";
 
 export function decks(state = {}, action) {
   const { error, decks } = action;
